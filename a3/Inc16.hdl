@@ -1,0 +1,28 @@
+/**
+ * Mai Nou Yang & Nathan Moder
+ * 16-bit incrementer:  out = in + 1 (16-bit addition)
+ * Overflow is neither detected nor handled.
+ */
+CHIP Inc16 {
+
+    IN  in[16];
+    OUT out[16];
+
+    PARTS:
+        FullAdder(a=in[0], b=false, c=true, sum=out[0], carry=cout1);
+        FullAdder(a=in[1], b=false, c=cout1, sum=out[1], carry=cout2);
+        FullAdder(a=in[2], b=false, c=cout2, sum=out[2], carry=cout3);
+        FullAdder(a=in[3], b=false, c=cout3, sum=out[3], carry=cout4);
+        FullAdder(a=in[4], b=false, c=cout4, sum=out[4], carry=cout5);
+        FullAdder(a=in[5], b=false, c=cout5, sum=out[5], carry=cout6);
+        FullAdder(a=in[6], b=false, c=cout6, sum=out[6], carry=cout7);
+        FullAdder(a=in[7], b=false, c=cout7, sum=out[7], carry=cout8);
+        FullAdder(a=in[8], b=false, c=cout8, sum=out[8], carry=cout9);
+        FullAdder(a=in[9], b=false, c=cout9, sum=out[9], carry=cout10);
+        FullAdder(a=in[10], b=false, c=cout10, sum=out[10], carry=cout11);
+        FullAdder(a=in[11], b=false, c=cout11, sum=out[11], carry=cout12);
+        FullAdder(a=in[12], b=false, c=cout12, sum=out[12], carry=cout13);
+        FullAdder(a=in[13], b=false, c=cout13, sum=out[13], carry=cout14);
+        FullAdder(a=in[14], b=false, c=cout14, sum=out[14], carry=cout15);
+        FullAdder(a=in[15], b=false, c=cout15, sum=out[15], carry=cout16);
+}

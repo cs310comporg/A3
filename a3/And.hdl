@@ -1,0 +1,13 @@
+/**
+ * Mai Nou Yang & Nathan Moder
+ * And gate: out = a AND b
+ */
+CHIP And {
+
+    IN  a, b;
+    OUT out;
+
+    PARTS:
+        Nand(a=a, b=b, out=notAandB);
+        Nand(a=notAandB, b=notAandB, out=out);
+}

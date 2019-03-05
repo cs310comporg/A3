@@ -1,0 +1,15 @@
+/**
+ * Mai Nou Yang & Nathan Moder
+ * 2-to-1 Multiplexer: If sel==1 then out=b else out=a
+ */
+
+CHIP Mux {
+    IN a, b, sel;
+    OUT out;
+
+    PARTS:
+        Not(in=sel, out=notSel);
+        And(a=notSel, b=a, out=out1);
+        And(a=sel, b=b, out=out2);
+        Or(a=out1, b=out2, out=out);
+}
