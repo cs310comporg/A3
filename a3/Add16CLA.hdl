@@ -43,342 +43,163 @@ CHIP Add16CLA {
         Mux(a=b[14], b=notB14, sel=cin, out=out14);
         Not(in=b[15], out=notB15);
         Mux(a=b[15], b=notB15, sel=cin, out=out15);
-        //Logic for Gi, Pi
-        And(a=a[0], b=out0, out=G0);
-        Or(a=a[0], b=out0, out=P0);
-        And(a=a[1], b=out1, out=G1);
-        Or(a=a[1], b=out1, out=P1);
-        And(a=a[2], b=out2, out=G2);
-        Or(a=a[2], b=out2, out=P2);
-        And(a=a[3], b=out3, out=G3);
-        Or(a=a[3], b=out3, out=P3);
-        And(a=a[4], b=out4, out=G4);
-        Or(a=a[4], b=out4, out=P4);
-        And(a=a[5], b=out5, out=G5);
-        Or(a=a[5], b=out5, out=P5);
-        And(a=a[6], b=out6, out=G6);
-        Or(a=a[6], b=out6, out=P6);
-        And(a=a[7], b=out7, out=G7);
-        Or(a=a[7], b=out7, out=P7);
-        And(a=a[8], b=out8, out=G8);
-        Or(a=a[8], b=out8, out=P8);
-        And(a=a[9], b=out9, out=G9);
-        Or(a=a[9], b=out9, out=P9);
-        And(a=a[10], b=out10, out=G10);
-        Or(a=a[10], b=out10, out=P10);
-        And(a=a[11], b=out11, out=G11);
-        Or(a=a[11], b=out11, out=P11);
-        And(a=a[12], b=out12, out=G12);
-        Or(a=a[12], b=out12, out=P12);
-        And(a=a[13], b=out13, out=G13);
-        Or(a=a[13], b=out13, out=P13);
-        And(a=a[14], b=out14, out=G14);
-        Or(a=a[14], b=out14, out=P14);
-        And(a=a[15], b=out15, out=G15);
-        Or(a=a[15], b=out15, out=P15);
-        //c1 from cLA
-        And(a=P0, b=cin, out=P0andcin);
-        Or(a=G0, b=P0andcin, out=c1);
-        //c2 from cLA
-        And(a=P0andcin, b=P1, out=c2Second);
-        And(a=P1, b=G0, out=c2First);
-        Or(a=G1, b=c2Second, out=c2FirstOr);
-        Or(a=c2FirstOr, b=c2Second, out=c2);
-        //c3 from cLA
-        And(a=c2Second, b=P2, out=c3Third);
-        And(a=c2First, b=P2, out=c3Second);
-        And(a=P2, b=G1, out=c3First);
-        Or(a=G2, b=c3First, out=c3FirstOr);
-        Or(a=c3FirstOr, b=c3Second, out=c3SecondOr);
-        Or(a=c3SecondOr, b=c3Third, out=c3);
-        //c4 from cLA
-        And(a=c3Third, b=P3, out=c4Fourth);
-        And(a=c3Second, b=P3, out=c4Third);
-        And(a=c3First, b=P3, out=c4Second);
-        And(a=P3, b=G2, out=c4First);
-        Or(a=G3, b=c4First, out=c4FirstOr);
-        Or(a=c4FirstOr, b=c4Second, out=c4SecondOr);
-        Or(a=c4SecondOr, b=c4Third, out=c4ThirdOr);
-        Or(a=c4ThirdOr, b=c4Fourth, out=c4);
-        //c5 from cla
-        And(a=c4Fourth, b=P4, out=c5Fifth);
-        And(a=c4Third, b=P4, out=c5Fourth);
-        And(a=c4Second, b=P4, out=c5Third);
-        And(a=c4First, b=P4, out=c5Second);
-        And(a=P4, b=G3, out=c5First);
-        Or(a=G4, b=c5First, out=c5FirstOr);
-        Or(a=c5Third, b=c5Second, out=c5SecondOr);
-        Or(a=c5Fourth, b=c5Fifth, out=c5ThirdOr);
-        Or(a=c5FirstOr, b=c5SecondOr, out=c5FourthOr);
-        Or(a=c5ThirdOr, b=c5FourthOr, out=c5);
-        //c6 from cla
-        And(a=c5Fifth, b=P5, out=c6Sixth);
-        And(a=c5Fourth, b=P5, out=c6Fifth);
-        And(a=c5Third, b=P5, out=c6Fourth);
-        And(a=c5Second, b=P5, out=c6Third);
-        And(a=c5First, b=P5, out=c6Second);
-        And(a=G4, b=P5, out=c6First);
-        Or(a=G5, b=c6First, out=c6FirstOr);
-        Or(a=c6Second, b=c6Third, out=c6SecondOr);
-        Or(a=c6Fifth, b=c6Fourth, out=c6ThirdOr);
-        Or(a=c6FirstOr, b=c6SecondOr, out=c6FourthOr);
-        Or(a=c6ThirdOr, b=c6Sixth, out=c6FifthOr);
-        Or(a=c6FifthOr, b=c6FourthOr, out=c6);
-        //c7
-        And(a=c6Sixth, b=P6, out=c7Seventh);
-        And(a=c6Fifth, b=P6, out=c7Sixth);
-        And(a=c6Fourth, b=P6, out=c7Fifth);
-        And(a=c6Third, b=P6, out=c7Fourth);
-        And(a=c6Second, b=P6, out=c7Third);
-        And(a=c6First, b=P6, out=c7Second);
-        And(a=G5, b=P6, out=c7First);
-        Or(a=G6, b=c7First, out=c7FirstOr);
-        Or(a=c7Second, b=c7Third, out=c7SecondOr);
-        Or(a=c7Fourth, b=c6Fifth, out=c7ThirdOr);
-        Or(a=c7Sixth, b=c7Seventh, out=c7FourthOr);
-        Or(a=c7FirstOr, b=c7SecondOr, out=c7FifthOr);
-        Or(a=c7ThirdOr, b=c7FourthOr, out=c7SixthOr);
-        Or(a=c7FifthOr, b=c7SixthOr, out=c7);
-        //c8
-        And(a=P7, b=c7Seventh, out=c8Eighth);
-        And(a=P7, b=c7Sixth, out=c8Seventh);
-        And(a=P7, b=c7Fifth, out=c8Sixth);
-        And(a=P7, b=c7Fourth, out=c8Fifth);
-        And(a=P7, b=c7Third, out=c8Fourth);
-        And(a=P7, b=c7Second, out=c8Third);
-        And(a=P7, b=c7First, out=c8Second);
-        And(a=P7, b=G6, out=c8First);
-        Or(a=G7, b=c8First, out=c8FirstOr);
-        Or(a=c8Second, b=c8Third, out=c8SecondOr);
-        Or(a=c8Fourth, b=c8Fifth, out=c8ThirdOr);
-        Or(a=c8Sixth, b=c8Seventh, out=c8FourthOr);
-        Or(a=c8FirstOr, b=c8SecondOr, out=c8FifthOr);
-        Or(a=c8ThirdOr, b=c8FourthOr, out=c8SixthOr);
-        Or(a=c8FifthOr, b=c8SixthOr, out=c8SeventhOr);
-        Or(a=c8Eighth, b=c8SeventhOr, out=c8);
-        //c9
-        And(a=P8, b=c8Eighth, out=c9Ninth);
-        And(a=P8, b=c8Seventh, out=c9Eighth);
-        And(a=P8, b=c8Sixth, out=c9Seventh);
-        And(a=P8, b=c8Fifth, out=c9Sixth);
-        And(a=P8, b=c8Fourth, out=c9Fifth);
-        And(a=P8, b=c8Third, out=c9Fourth);
-        And(a=P8, b=c8Second, out=c9Third);
-        And(a=P8, b=c8First, out=c9Second);
-        And(a=P8, b=G7, out=c9First);
-        Or(a=G8, b=c9First, out=c9FirstOr);
-        Or(a=c9Second, b=c9Third, out=c9SecondOr);
-        Or(a=c9Fourth, b=c9Fifth, out=c9ThirdOr);
-        Or(a=c9Sixth, b=c9Seventh, out=c9FourthOr);
-        Or(a=c9Eighth, b=c9Ninth, out=c9FifthOr);
-        Or(a=c9FirstOr, b=c9SecondOr, out=c9SixthOr);
-        Or(a=c9ThirdOr, b=c9FourthOr, out=c9SeventhOr);
-        Or(a=c9SeventhOr, b=c9SixthOr, out=c9EighthOr);
-        Or(a=c9EighthOr, b=c9FifthOr, out=c9);
-        //c10
-        And(a=P9, b=c9Ninth, out=c10Tenth);
-        And(a=P9, b=c9Eighth, out=c10Ninth);
-        And(a=P9, b=c9Seventh, out=c10Eighth);
-        And(a=P9, b=c9Sixth, out=c10Seventh);
-        And(a=P9, b=c9Fifth, out=c10Sixth);
-        And(a=P9, b=c9Fourth, out=c10Fifth);
-        And(a=P9, b=c9Third, out=c10Fourth);
-        And(a=P9, b=c8Second, out=c10Third);
-        And(a=P9, b=c9First, out=c10Second);
-        And(a=P9, b=G8, out=c10First);
-        Or(a=G9, b=c10First, out=c10FirstOr);
-        Or(a=c10Second, b=c10Third, out=c10SecondOr);
-        Or(a=c10Fourth, b=c10Fifth, out=c10ThirdOr);
-        Or(a=c10Sixth, b=c10Seventh, out=c10FourthOr);
-        Or(a=c10Eighth, b=c10Ninth, out=c10FifthOr);
-        Or(a=c10FirstOr, b=c10SecondOr, out=c10SixthOr);
-        Or(a=c10ThirdOr, b=c10FourthOr, out=c10SeventhOr);
-        Or(a=c10SeventhOr, b=c10SixthOr, out=c10EighthOr);
-        Or(a=c10EighthOr, b=c10Fifth, out=c10NinthOr);
-        Or(a=c10NinthOr, b=c10Tenth, out=c10);
-        //c11
-        And(a=P10, b=c10Tenth, out=c11Eleventh);
-        And(a=P10, b=c10Ninth, out=c11Tenth);
-        And(a=P10, b=c10Eighth, out=c11Ninth);
-        And(a=P10, b=c10Seventh, out=c11Eighth);
-        And(a=P10, b=c10Sixth, out=c11Seventh);
-        And(a=P10, b=c10Fifth, out=c11Sixth);
-        And(a=P10, b=c10Fourth, out=c11Fifth);
-        And(a=P10, b=c10Third, out=c11Fourth);
-        And(a=P10, b=c10Second, out=c11Third);
-        And(a=P10, b=c10First, out=c11Second);
-        And(a=P10, b=G9, out=c11First);
-        Or(a=G10, b=c11First, out=c11FirstOr);
-        Or(a=c11Second, b=c11Third, out=c11SecondOr);
-        Or(a=c11Fourth, b=c11Fifth, out=c11ThirdOr);
-        Or(a=c11Sixth, b=c11Seventh, out=c11FourthOr);
-        Or(a=c11Eighth, b=c11Ninth, out=c11FifthOr);
-        Or(a=c11Tenth, b=c11Eleventh, out=c11SixthOr);
-        Or(a=c11FirstOr, b=c11SecondOr, out=c11SeventhOr);
-        Or(a=c11ThirdOr, b=c11FourthOr, out=c11EighthOr);
-        Or(a=c11FifthOr, b=c11SixthOr, out=c11NinthOr);
-        Or(a=c11EighthOr, b=c11SeventhOr, out=c11TenthOr);
-        Or(a=c11NinthOr, b=c11TenthOr, out=c11);
-        //c12
-        And(a=P11, b=c11Eleventh, out=c12Twelvth);
-        And(a=P11, b=c11Tenth, out=c12Eleventh);
-        And(a=P11, b=c11Ninth, out=c12Tenth);
-        And(a=P11, b=c11Eighth, out=c12Ninth);
-        And(a=P11, b=c11Seventh, out=c12Eighth);
-        And(a=P11, b=c11Sixth, out=c12Seventh);
-        And(a=P11, b=c11Fifth, out=c12Sixth);
-        And(a=P11, b=c11Fourth, out=c12Fifth);
-        And(a=P11, b=c11Third, out=c12Fourth);
-        And(a=P11, b=c11Second, out=c12Third);
-        And(a=P11, b=c11First, out=c12Second);
-        And(a=P11, b=G9, out=c12First);
-        Or(a=G11, b=c12First, out=c12FirstOr);
-        Or(a=c12Second, b=c12Third, out=c12SecondOr);
-        Or(a=c12Fourth, b=c12Fifth, out=c12ThirdOr);
-        Or(a=c12Sixth, b=c12Seventh, out=c12FourthOr);
-        Or(a=c12Eighth, b=c12Ninth, out=c12FifthOr);
-        Or(a=c12Tenth, b=c12Eleventh, out=c12SixthOr);
-        Or(a=c12FirstOr, b=c12SecondOr, out=c12SeventhOr);
-        Or(a=c12ThirdOr, b=c12FourthOr, out=c12EighthOr);
-        Or(a=c12FifthOr, b=c12SixthOr, out=c12NinthOr);
-        Or(a=c12EighthOr, b=c12SeventhOr, out=c12TenthOr);
-        Or(a=c12NinthOr, b=c12TenthOr, out=c12EleventhOr);
-        Or(a=c12EleventhOr, b=c12Twelvth, out=c12);
-        //c13
-        And(a=P12, b=c12Twelvth, out=c13Thirteenth);
-        And(a=P12, b=c12Eleventh, out=c13Twelvth);
-        And(a=P12, b=c12Tenth, out=c13Eleventh);
-        And(a=P12, b=c12Ninth, out=c13Tenth);
-        And(a=P12, b=c12Eighth, out=c13Ninth);
-        And(a=P12, b=c12Seventh, out=c13Eighth);
-        And(a=P12, b=c12Sixth, out=c13Seventh);
-        And(a=P12, b=c12Fifth, out=c13Sixth);
-        And(a=P12, b=c12Fourth, out=c13Fifth);
-        And(a=P12, b=c12Third, out=c13Fourth);
-        And(a=P12, b=c12Second, out=c13Third);
-        And(a=P12, b=c12First, out=c13Second);
-        And(a=P12, b=G11, out=c13First);
-        Or(a=G12, b=c13First, out=c13FirstOr);
-        Or(a=c13Second, b=c13Third, out=c13SecondOr);
-        Or(a=c13Fourth, b=c13Fifth, out=c13ThirdOr);
-        Or(a=c13Sixth, b=c13Seventh, out=c13FourthOr);
-        Or(a=c13Eighth, b=c13Ninth, out=c13FifthOr);
-        Or(a=c13Tenth, b=c13Eleventh, out=c13SixthOr);
-        Or(a=c13Twelvth, b=c13Thirteenth, out=c13SeventhOr);
-        Or(a=c13FirstOr, b=c13SecondOr, out=c13EighthOr);
-        Or(a=c13ThirdOr, b=c13FourthOr, out=c13NinthOr);
-        Or(a=c13FifthOr, b=c13SixthOr, out=c13TenthOr);
-        Or(a=c13EighthOr, b=c13NinthOr, out=c13EleventhOr);
-        Or(a=c13SeventhOr, b=c13TenthOr, out=c13TwelvthOr);
-        Or(a=c13EleventhOr, b=c13TwelvthOr, out=c13);
-        //c14
-        And(a=P13, b=c13Thirteenth, out=c14Fourteenth);
-        And(a=P13, b=c13Twelvth, out=c14Thirteenth);
-        And(a=P13, b=c13Eleventh, out=c14Twelvth);
-        And(a=P13, b=c13Tenth, out=c14Eleventh);
-        And(a=P13, b=c13Ninth, out=c14Tenth);
-        And(a=P13, b=c13Eighth, out=c14Ninth);
-        And(a=P13, b=c13Seventh, out=c14Eighth);
-        And(a=P13, b=c13Sixth, out=c14Seventh);
-        And(a=P13, b=c13Fifth, out=c14Sixth);
-        And(a=P13, b=c13Fourth, out=c14Fifth);
-        And(a=P13, b=c13Third, out=c14Fourth);
-        And(a=P13, b=c13Second, out=c14Third);
-        And(a=P13, b=c13First, out=c14Second);
-        And(a=P13, b=G12, out=c14First);
-        Or(a=G13, b=c14First, out=c14FirstOr);
-        Or(a=c14Second, b=c14Third, out=c14SecondOr);
-        Or(a=c14Fourth, b=c14Fifth, out=c14ThirdOr);
-        Or(a=c14Sixth, b=c14Seventh, out=c14FourthOr);
-        Or(a=c14Eighth, b=c14Ninth, out=c14FifthOr);
-        Or(a=c14Tenth, b=c14Eleventh, out=c14SixthOr);
-        Or(a=c14Twelvth, b=c14Thirteenth, out=c14SeventhOr);
-        Or(a=c14FirstOr, b=c14SecondOr, out=c14EighthOr);
-        Or(a=c14ThirdOr, b=c14FourthOr, out=c14NinthOr);
-        Or(a=c14FifthOr, b=c14SixthOr, out=c14TenthOr);
-        Or(a=c14EighthOr, b=c14SeventhOr, out=c14EleventhOr);
-        Or(a=c14NinthOr, b=c14TenthOr, out=c14TwelvthOr);
-        Or(a=c14EleventhOr, b=c14TwelvthOr, out=c14ThirteenthOr);
-        Or(a=c14ThirteenthOr, b=c14Fourteenth, out=c14);
-        //c15
-        And(a=P14, b=c14Fourteenth, out=c15Fifteenth);
-        And(a=P14, b=c14Thirteenth, out=c15Fourteenth);
-        And(a=P14, b=c14Twelvth, out=c15Thirteenth);
-        And(a=P14, b=c14Eleventh, out=c15Twelvth);
-        And(a=P14, b=c14Tenth, out=c15Eleventh);
-        And(a=P14, b=c14Ninth, out=c15Tenth);
-        And(a=P14, b=c14Eighth, out=c15Ninth);
-        And(a=P14, b=c14Seventh, out=c15Eighth);
-        And(a=P14, b=c14Sixth, out=c15Seventh);
-        And(a=P14, b=c14Fifth, out=c15Sixth);
-        And(a=P14, b=c14Fourth, out=c15Fifth);
-        And(a=P14, b=c14Third, out=c15Fourth);
-        And(a=P14, b=c14Second, out=c15Third);
-        And(a=P14, b=c14First, out=c15Second);
-        And(a=P14, b=G13, out=c15First);
-        Or(a=G14, b=c15First, out=c15FirstOr);
-        Or(a=c15Second, b=c15Third, out=c15SecondOr);
-        Or(a=c15Fourth, b=c15Fifth, out=c15ThirdOr);
-        Or(a=c15Sixth, b=c15Seventh, out=c15FourthOr);
-        Or(a=c15Eighth, b=c15Ninth, out=c15FifthOr);
-        Or(a=c15Tenth, b=c15Eleventh, out=c15SixthOr);
-        Or(a=c15Twelvth, b=c15Thirteenth, out=c15SeventhOr);
-        Or(a=c15Fourteenth, b=c15Fifteenth, out=c15EighthOr);
-        Or(a=c15FirstOr, b=c15SecondOr, out=c15NinthOr);
-        Or(a=c15ThirdOr, b=c15FourthOr, out=c15TenthOr);
-        Or(a=c15FifthOr, b=c15SixthOr, out=c15EleventhOr);
-        Or(a=c15EighthOr, b=c15SeventhOr, out=c15TwelvthOr);
-        Or(a=c15NinthOr, b=c15TenthOr, out=c15ThirteenthOr);
-        Or(a=c15EleventhOr, b=c15TwelvthOr, out=c15FourteenthOr);
-        Or(a=c15ThirteenthOr, b=c15Fourteenth, out=c15);
-        //cout
-        And(a=P15, b=c15Fifteenth, out=c16Sixteenth);
-        And(a=P15, b=c15Fourteenth, out=c16Fifteenth);
-        And(a=P15, b=c15Thirteenth, out=c16Fourteenth);
-        And(a=P15, b=c15Twelvth, out=c16Thirteenth);
-        And(a=P15, b=c15Eleventh, out=c16Twelvth);
-        And(a=P15, b=c15Tenth, out=c16Eleventh);
-        And(a=P15, b=c15Ninth, out=c16Tenth);
-        And(a=P15, b=c15Eighth, out=c16Ninth);
-        And(a=P15, b=c15Seventh, out=c16Eighth);
-        And(a=P15, b=c15Sixth, out=c16Seventh);
-        And(a=P15, b=c15Fifth, out=c16Sixth);
-        And(a=P15, b=c15Fourth, out=c16Fifth);
-        And(a=P15, b=c15Third, out=c16Fourth);
-        And(a=P15, b=c15Second, out=c16Third);
-        And(a=P15, b=c15First, out=c16Second);
-        And(a=P15, b=G14, out=c16First);
-        Or(a=G15, b=c16First, out=c16FirstOr);
-        Or(a=c16Second, b=c16Third, out=c16SecondOr);
-        Or(a=c16Fourth, b=c16Fifth, out=c16ThirdOr);
-        Or(a=c16Sixth, b=c16Seventh, out=c16FourthOr);
-        Or(a=c16Eighth, b=c16Ninth, out=c16FifthOr);
-        Or(a=c16Tenth, b=c16Eleventh, out=c16SixthOr);
-        Or(a=c16Twelvth, b=c16Thirteenth, out=c16SeventhOr);
-        Or(a=c16Fourteenth, b=c16Fifteenth, out=c16EighthOr);
-        Or(a=c16FirstOr, b=c16SecondOr, out=c16NinthOr);
-        Or(a=c16ThirdOr, b=c16FourthOr, out=c16TenthOr);
-        Or(a=c16FifthOr, b=c16SixthOr, out=c16EleventhOr);
-        Or(a=c16EighthOr, b=c16SeventhOr, out=c16TwelvthOr);
-        Or(a=c16NinthOr, b=c16TenthOr, out=c16ThirteenthOr);
-        Or(a=c16EleventhOr, b=c16TwelvthOr, out=c16FourteenthOr);
-        Or(a=c16ThirteenthOr, b=c16Fourteenth, out=c16FifteenthOr);
-        Or(a=c16Fifteenth, b=c16Sixteenth, out=cout);
+
+
+		//P First Chunk
+		And(a=a[0], b=out0, out=p00);
+		And(a=a[1], b=out1, out=p01);
+		And(a=a[2], b=out2, out=p02);
+		And(a=a[3], b=out3, out=p03);
+		And(a=p00, b=p01, out=P00);
+		And(a=p02, b=p03, out=P01);
+		And(a=P00, b=P01, out=P0);
+
+		//P Second Chunk
+		And(a=a[4], b=out4, out=p10);
+		And(a=a[5], b=out5, out=p11);
+		And(a=a[6], b=out6, out=p12);
+		And(a=a[7], b=out7, out=p13);
+		And(a=p10, b=p11, out=P10);
+		And(a=p12, b=p13, out=P11);
+		And(a=P10, b=P11, out=P1);
+
+		//P Third Chunk
+		And(a=a[8], b=out8, out=p20);
+		And(a=a[9], b=out9, out=p21);
+		And(a=a[10], b=out10, out=p22);
+		And(a=a[11], b=out11, out=p23);
+		And(a=p20, b=p21, out=P20);
+		And(a=p22, b=p23, out=P21);
+		And(a=P20, b=P21, out=P2);
+
+		//P Fourth Chunk
+		And(a=a[12], b=out12, out=p30);
+		And(a=a[13], b=out13, out=p31);
+		And(a=a[14], b=out14, out=p32);
+		And(a=a[15], b=out15, out=p33);
+		And(a=p30, b=p31, out=P30);
+		And(a=p32, b=p33, out=P31);
+		And(a=P30, b=P31, out=P3);
+
+		//G First Chunk
+		And(a=a[0], b=out0, out=g00);
+		And(a=a[1], b=out1, out=g01);
+		And(a=a[2], b=out2, out=g02);
+		And(a=a[3], b=out3, out=g03);
+
+		And(a=p03, b=p02, out=p03Andp02);
+		And(a=p01, b=g00, out=p01Andg00);
+		And(a=p03Andp02, b=p01Andg00, out=g0out3);
+
+		And(a=p03Andp02, b=g01, out=g0out2);
+
+		And(a=p03, b=g02, out=g0out1);
+
+		Or(a=g03, b=g0out1, out=g0or1);
+		Or(a=g0out3, b=g0out2, out=g0or2);
+		Or(a=g0or1, b=g0or2, out=G0);
+
+
+		//G Second Chunk
+		And(a=a[4], b=out4, out=g10);
+		And(a=a[5], b=out5, out=g11);
+		And(a=a[6], b=out6, out=g12);
+		And(a=a[7], b=out7, out=g13);
+
+		And(a=p13, b=p12, out=p13Andp12);
+		And(a=p11, b=g10, out=p11Andg10);
+		And(a=p13Andp12, b=p11Andg10, out=g1out3);
+
+		And(a=p13Andp12, b=g11, out=g1out2);
+
+		And(a=p13, b=g12, out=g1out1);
+
+		Or(a=g13, b=g1out1, out=g1or1);
+		Or(a=g1out3, b=g1out2, out=g1or2);
+		Or(a=g1or1, b=g1or2, out=G1);
+
+		//G Third Chunk
+		And(a=a[8], b=out8, out=g20);
+		And(a=a[9], b=out9, out=g21);
+		And(a=a[10], b=out10, out=g22);
+		And(a=a[11], b=out11, out=g23);
+
+		And(a=p23, b=p22, out=p23Andp22);
+		And(a=p21, b=g20, out=p21Andg20);
+		And(a=p23Andp22, b=p21Andg20, out=g2out3);
+
+		And(a=p23Andp22, b=g21, out=g2out2);
+
+		And(a=p23, b=g22, out=g2out1);
+
+		Or(a=g23, b=g2out1, out=g2or1);
+		Or(a=g2out3, b=g2out2, out=g2or2);
+		Or(a=g2or1, b=g2or2, out=G2);
+
+		//G Fourth Chunk
+		And(a=a[12], b=out12, out=g30);
+		And(a=a[13], b=out13, out=g31);
+		And(a=a[14], b=out14, out=g32);
+		And(a=a[15], b=out15, out=g33);
+
+		And(a=p33, b=p32, out=p33Andp32);
+		And(a=p31, b=g30, out=p31Andg30);
+		And(a=p33Andp32, b=p31Andg30, out=g3out3);
+
+		And(a=p33Andp32, b=g31, out=g3out2);
+
+		And(a=p33, b=g32, out=g3out1);
+
+		Or(a=g33, b=g3out1, out=g3or1);
+		Or(a=g3out3, b=g3out2, out=g3or2);
+		Or(a=g3or1, b=g3or2, out=G3);
+
+		//C1
+		And(a=P0, b=cin, out=P0AndCin);
+		Or(a=G0, b=P0AndCin, out=C1);
+
+		//C2
+		And(a=P1, b=P0AndCin, out=P1AndP0AndCin);
+		And(a=P1, b=G0, out=P1AndG0);
+		Or(a=P1AndP0AndCin, b=P1AndG0, out=C2Temp1);
+		Or(a=G1, b=C2Temp1, out=C2);
+
+		//C3
+		And(a=P2, b=P1AndP0AndCin, out=P2P1P0CinAND);
+		And(a=P2, b=P1AndG0, out=P2AndP1AndG0);
+		And(a=P2, b=G1, out=P2AndG1);
+		Or(a=P2P1P0CinAND, b=P2AndP1AndG0, out=C3Temp1);
+		Or(a=G2, b=P2AndG1, out=C3Temp2);
+		Or(a=C3Temp1, b=C3Temp2, out=C3);
+
+		//C4 (cout)
+		And(a=P3, b=P2P1P0CinAND, out=P3210CinAND);
+		And(a=P3, b=P2AndP1AndG0, out=P3P2P1G0AND);
+		And(a=P3, b=P2AndG1, out=P3AndP2AndG1);
+		And(a=P3, b=G2, out=P3AndG2);
+		Or(a=G3, b=P3AndG2, out=C4Temp1);
+		Or(a=P3AndP2AndG1, b=P3P2P1G0AND, out=C4Temp2);
+		Or(a=P3210CinAND, b=C4Temp1, out=C4Temp3);
+		Or(a=C4Temp2, b=C4Temp3, out=C4);
+
         //compute the addition
-        FullAdder(a=a[0], b=out0, c=cin, carry=garbage1, sum=out[0]);
-        FullAdder(a=a[1], b=out1, c=c1, carry=garbage2, sum=out[1]);
-        FullAdder(a=a[2], b=out2, c=c2, carry=garbage3, sum=out[2]);
-        FullAdder(a=a[3], b=out3, c=c3, carry=garbage4, sum=out[3]);
-        FullAdder(a=a[4], b=out4, c=c4, carry=garbage5, sum=out[4]);
-        FullAdder(a=a[5], b=out5, c=c5, carry=garbage6, sum=out[5]);
-        FullAdder(a=a[6], b=out6, c=c6, carry=garbage7, sum=out[6]);
-        FullAdder(a=a[7], b=out7, c=c7, carry=garbage8, sum=out[7]);
-        FullAdder(a=a[8], b=out8, c=c8, carry=garbage9, sum=out[8]);
-        FullAdder(a=a[9], b=out9, c=c9, carry=garbage10, sum=out[9]);
-        FullAdder(a=a[10], b=out10, c=c10, carry=garbage11, sum=out[10]);
-        FullAdder(a=a[11], b=out11, c=c11, carry=garbage12, sum=out[11]);
-        FullAdder(a=a[12], b=out12, c=c12, carry=garbage13, sum=out[12]);
-        FullAdder(a=a[13], b=out13, c=c13, carry=garbage14, sum=out[13]);
-        FullAdder(a=a[14], b=out14, c=c14, carry=garbage15, sum=out[14]);
-        FullAdder(a=a[15], b=out15, c=c15, carry=garbage16, sum=out[15]);
+        FullAdder(a=a[0], b=out0, c=cin, carry=c1, sum=out[0]);
+        FullAdder(a=a[1], b=out1, c=c1, carry=c2, sum=out[1]);
+        FullAdder(a=a[2], b=out2, c=c2, carry=c3, sum=out[2]);
+        FullAdder(a=a[3], b=out3, c=c3, carry=c4, sum=out[3]);
+
+		FullAdder(a=a[4], b=out4, c=C1, carry=c5, sum=out[4]);
+        FullAdder(a=a[5], b=out5, c=c5, carry=c6, sum=out[5]);
+        FullAdder(a=a[6], b=out6, c=c6, carry=c7, sum=out[6]);
+        FullAdder(a=a[7], b=out7, c=c7, carry=c8, sum=out[7]);
+
+		FullAdder(a=a[8], b=out8, c=C2, carry=c9, sum=out[8]);
+        FullAdder(a=a[9], b=out9, c=c9, carry=c10, sum=out[9]);
+        FullAdder(a=a[10], b=out10, c=c10, carry=c11, sum=out[10]);
+        FullAdder(a=a[11], b=out11, c=c11, carry=c12, sum=out[11]);
+
+		FullAdder(a=a[12], b=out12, c=C3, carry=c13, sum=out[12]);
+        FullAdder(a=a[13], b=out13, c=c13, carry=c14, sum=out[13]);
+        FullAdder(a=a[14], b=out14, c=c14, carry=c15, sum=out[14]);
+        FullAdder(a=a[15], b=out15, c=c15, carry=cout, sum=out[15]);
 }
