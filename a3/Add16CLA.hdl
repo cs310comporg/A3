@@ -46,37 +46,37 @@ CHIP Add16CLA {
 
 
 		//P First Chunk
-		And(a=a[0], b=out0, out=p00);
-		And(a=a[1], b=out1, out=p01);
-		And(a=a[2], b=out2, out=p02);
-		And(a=a[3], b=out3, out=p03);
+		Or(a=a[0], b=out0, out=p00);
+		Or(a=a[1], b=out1, out=p01);
+		Or(a=a[2], b=out2, out=p02);
+		Or(a=a[3], b=out3, out=p03);
 		And(a=p00, b=p01, out=P00);
 		And(a=p02, b=p03, out=P01);
 		And(a=P00, b=P01, out=P0);
 
 		//P Second Chunk
-		And(a=a[4], b=out4, out=p10);
-		And(a=a[5], b=out5, out=p11);
-		And(a=a[6], b=out6, out=p12);
-		And(a=a[7], b=out7, out=p13);
+		Or(a=a[4], b=out4, out=p10);
+		Or(a=a[5], b=out5, out=p11);
+		Or(a=a[6], b=out6, out=p12);
+		Or(a=a[7], b=out7, out=p13);
 		And(a=p10, b=p11, out=P10);
 		And(a=p12, b=p13, out=P11);
 		And(a=P10, b=P11, out=P1);
 
 		//P Third Chunk
-		And(a=a[8], b=out8, out=p20);
-		And(a=a[9], b=out9, out=p21);
-		And(a=a[10], b=out10, out=p22);
-		And(a=a[11], b=out11, out=p23);
+		Or(a=a[8], b=out8, out=p20);
+		Or(a=a[9], b=out9, out=p21);
+		Or(a=a[10], b=out10, out=p22);
+		Or(a=a[11], b=out11, out=p23);
 		And(a=p20, b=p21, out=P20);
 		And(a=p22, b=p23, out=P21);
 		And(a=P20, b=P21, out=P2);
 
 		//P Fourth Chunk
-		And(a=a[12], b=out12, out=p30);
-		And(a=a[13], b=out13, out=p31);
-		And(a=a[14], b=out14, out=p32);
-		And(a=a[15], b=out15, out=p33);
+		Or(a=a[12], b=out12, out=p30);
+		Or(a=a[13], b=out13, out=p31);
+		Or(a=a[14], b=out14, out=p32);
+		Or(a=a[15], b=out15, out=p33);
 		And(a=p30, b=p31, out=P30);
 		And(a=p32, b=p33, out=P31);
 		And(a=P30, b=P31, out=P3);
